@@ -115,5 +115,17 @@ class ChangeTest {
         assertTrue("Elements in Change should be sorted from smallest to largest",isSorted)
     }
 
+    @Test
+    fun `test clone returns a deep copy of the Change object`() {
+        val change = Change()
+            .add(Bill.TEN_EURO, 2)
+            .add(Coin.FIFTY_CENT, 3)
+        val clonedChange = change.clone()
+
+        assertEquals(change, clonedChange)
+        change.add(Bill.TEN_EURO, 1)
+        assertNotEquals(change, clonedChange)
+    }
+
 
 }

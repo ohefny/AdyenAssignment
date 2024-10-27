@@ -9,7 +9,9 @@ import com.adyen.android.assignment.money.ImmutableChange.Companion.toImmutable
  *
  * @param registerChange The change that the CashRegister is holding.
  */
-class CashRegister(private val registerChange: Change) {
+class CashRegister(initialChange: Change) {
+
+    private val registerChange: Change = initialChange.clone()
     /**
      * Performs a transaction for a product/products with a certain price and a given amount.
      *

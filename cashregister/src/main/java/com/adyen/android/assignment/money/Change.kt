@@ -56,6 +56,12 @@ class Change {
         return map.toString()
     }
 
+    fun clone(): Change {
+        val change = Change()
+        map.forEach { (element, count) -> change.add(element, count) }
+        return change
+    }
+
     companion object {
         fun max(): Change {
             val change = Change()
