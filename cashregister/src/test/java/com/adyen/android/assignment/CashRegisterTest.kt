@@ -3,6 +3,7 @@ package com.adyen.android.assignment
 import com.adyen.android.assignment.money.Bill
 import com.adyen.android.assignment.money.Change
 import com.adyen.android.assignment.money.Coin
+import com.adyen.android.assignment.money.ImmutableChange.Companion.toImmutable
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
@@ -18,7 +19,7 @@ class CashRegisterTest {
         }
         val cashRegister = CashRegister(initialChange)
 
-        assertEquals(initialChange, cashRegister.checkChange())
+        assertEquals(initialChange.toImmutable(), cashRegister.checkChange())
     }
 
     @Test
@@ -57,7 +58,7 @@ class CashRegisterTest {
         }
 
         // Verify that the CashRegister’s change reflects the transaction correctly
-        assertEquals(finalRegisterChange, cashRegister.checkChange())
+        assertEquals(finalRegisterChange.toImmutable(), cashRegister.checkChange())
     }
 
 
@@ -82,7 +83,7 @@ class CashRegisterTest {
             add(Bill.TEN_EURO, 6) //1 added from amount paid
             add(Coin.TWO_CENT, 10)
         }
-        assertEquals(expectedRegisterChange, cashRegister.checkChange())
+        assertEquals(expectedRegisterChange.toImmutable(), cashRegister.checkChange())
     }
 
     @Test
@@ -106,7 +107,7 @@ class CashRegisterTest {
             add(Coin.FIFTY_CENT, 10)
             add(Bill.FIVE_EURO,1) // 1 subtracted as change
         }
-        assertEquals(expectedRegisterChange, cashRegister.checkChange())
+        assertEquals(expectedRegisterChange.toImmutable(), cashRegister.checkChange())
     }
 
     @Test
@@ -128,7 +129,7 @@ class CashRegisterTest {
             add(Coin.FIFTY_CENT, 10)
             add(Bill.FIVE_EURO,1) // 1 subtracted as change
         }
-        assertEquals(expectedRegisterChange1, cashRegister.checkChange())
+        assertEquals(expectedRegisterChange1.toImmutable(), cashRegister.checkChange())
 
         val amountPaid2 = Change().apply {
             add(Bill.TEN_EURO, 1)
@@ -142,7 +143,7 @@ class CashRegisterTest {
             add(Coin.FIFTY_CENT, 10)
             add(Bill.FIVE_EURO,1) // 1 subtracted as change
         }
-        assertEquals(expectedRegisterChange2, cashRegister.checkChange())
+        assertEquals(expectedRegisterChange2.toImmutable(), cashRegister.checkChange())
 
         //add another transaction
         val amountPaid3 = Change().apply {
@@ -223,7 +224,7 @@ class CashRegisterTest {
             add(Coin.TEN_CENT, 9)
             add(Coin.ONE_CENT, 50)
         }
-        assertEquals(expectedRegisterChange, cashRegister.checkChange())
+        assertEquals(expectedRegisterChange.toImmutable(), cashRegister.checkChange())
     }
 }
 

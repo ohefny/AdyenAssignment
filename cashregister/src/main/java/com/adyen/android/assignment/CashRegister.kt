@@ -1,6 +1,8 @@
 package com.adyen.android.assignment
 
 import com.adyen.android.assignment.money.Change
+import com.adyen.android.assignment.money.ImmutableChange
+import com.adyen.android.assignment.money.ImmutableChange.Companion.toImmutable
 
 /**
  * The CashRegister class holds the logic for performing transactions.
@@ -36,8 +38,8 @@ class CashRegister(private val registerChange: Change) {
         return changeGivenBack
     }
 
-    fun checkChange(): Change {
-        return registerChange
+    fun checkChange(): ImmutableChange {
+        return registerChange.toImmutable()
     }
 
     private fun addPaidChangeToRegister(amountPaid: Change) {
