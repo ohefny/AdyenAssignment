@@ -1,4 +1,4 @@
-package com.adyen.android.assignment.ui
+package com.adyen.android.assignment.venues.presentation.ui
 
 import androidx.activity.ComponentActivity
 

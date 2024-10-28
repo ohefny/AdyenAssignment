@@ -1,4 +1,4 @@
-package com.adyen.android.assignment.api.model
+package com.adyen.android.assignment.venues.data.api.model
 
 data class Location(
     val address: String,

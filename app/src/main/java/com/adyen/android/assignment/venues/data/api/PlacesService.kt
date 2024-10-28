@@ -1,7 +1,7 @@
-package com.adyen.android.assignment.api
+package com.adyen.android.assignment.venues.data.api
 
 import com.adyen.android.assignment.BuildConfig
-import com.adyen.android.assignment.api.model.ResponseWrapper
+import com.adyen.android.assignment.venues.data.api.model.ResponseWrapper
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
