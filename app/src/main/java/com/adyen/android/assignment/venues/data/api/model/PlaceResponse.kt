@@ -4,18 +4,21 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Place(
+data class PlaceResponse(
     @Json(name = "fsq_id")
     val id: String,
-    val categories: List<Category>,
+    val categories: List<CategoryResponse>,
     val distance: Int,
     @Json(name = "geocodes")
-    val geocode: GeoCode,
-    val location: Location,
+    val geocode: GeoCodeResponse,
+    val locationResponse: LocationResponse?,
     val name: String,
     val timezone: String,
+    @Json(name = "closed_bucket")
+    val closedBucket:String,
     @Json(name = "related_places")
-    val relatedPlaces: RelatedPlaces
+    val relatedPlaces: RelatedPlaces,
+    val photos: List<PhotoResponse>? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -26,13 +29,16 @@ data class RelatedPlaces(
 
 @JsonClass(generateAdapter = true)
 data class ParentPlace(
-    val fsq_id: String,
-    val categories: List<Category>,
+    @Json(name = "fsq_id")
+    val id: String,
+    val categories: List<CategoryResponse>,
     val name: String
 )
+
 @JsonClass(generateAdapter = true)
 data class ChildPlace(
-    val fsq_id: String,
-    val categories: List<Category>,
+    @Json(name = "fsq_id")
+    val id: String,
+    val categories: List<CategoryResponse>,
     val name: String
 )

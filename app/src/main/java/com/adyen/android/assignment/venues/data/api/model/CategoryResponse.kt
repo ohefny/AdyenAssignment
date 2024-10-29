@@ -1,10 +1,10 @@
 package com.adyen.android.assignment.venues.data.api.model
 
-import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ResponseWrapper(
-    @Json(name = "results")
-    val placeResponses: List<PlaceResponse>?,
+data class CategoryResponse(
+    val icon: Icon,
+    val id: String,
+    val name: String,
 )

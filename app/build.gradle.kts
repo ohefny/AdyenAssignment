@@ -72,14 +72,18 @@ dependencies {
     kapt(libs.moshi.kotlin.codegen)
     implementation (libs.hilt.android)
     kapt(libs.hilt.compiler)
-
     implementation(libs.androidx.lifecycle.runtime.compose.android)
+    implementation(libs.coil)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }

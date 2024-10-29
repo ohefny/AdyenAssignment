@@ -12,9 +12,12 @@ activityCompose = "1.9.0"
 composeBom = "2024.05.00"
 jetbrainsKotlinJvm = "1.9.23"
 retrofit = "2.9.0"
-hilt = "2.51.1"  # Specify the version you want to use
-hiltPlugin = "2.43.2"
+hilt = "2.51.1"
 lifecycleRuntimeComposeAndroid = "2.8.6"
+coil = "2.7.0"
+kotlinx-coroutines-test = "1.9.0"
+mockito-core = "4.6.1"
+mockito-kotlin = "4.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +42,10 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 moshi-kotlin-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

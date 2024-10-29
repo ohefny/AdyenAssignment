@@ -3,10 +3,11 @@ package com.adyen.android.assignment.venues.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.adyen.android.assignment.venues.data.api.model.Place
+import com.adyen.android.assignment.venues.data.api.model.PlaceResponse
 import com.adyen.android.assignment.venues.domain.GetPlacesUseCase
+import com.adyen.android.assignment.venues.domain.LatLng
+import com.adyen.android.assignment.venues.domain.Place
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -25,7 +26,7 @@ class PlacesViewModel @Inject constructor(private val getPlacesUseCase: GetPlace
     }
 
     private fun fetchPlaces() {
-        getPlacesUseCase()
+        getPlacesUseCase(LatLng(52.3676, 4.9041))
             .onEach { _places.value = it }
             .catch { Log.e(TAG, "fetchPlaces: ", it) }
             .launchIn(viewModelScope)
