@@ -1,7 +1,7 @@
 package com.adyen.android.assignment.venues.domain
 
+import com.adyen.android.assignment.location.domain.LatLng
 import com.adyen.android.assignment.venues.Mocker
-import com.adyen.android.assignment.venues.data.PlacesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first

@@ -11,7 +11,8 @@ data class PlaceResponse(
     val distance: Int,
     @Json(name = "geocodes")
     val geocode: GeoCodeResponse,
-    val locationResponse: LocationResponse?,
+    @Json(name = "location")
+    val location: LocationResponse?,
     val name: String,
     val timezone: String,
     @Json(name = "closed_bucket")

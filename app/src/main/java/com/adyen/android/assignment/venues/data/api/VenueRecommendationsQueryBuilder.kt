@@ -16,5 +16,7 @@ class VenueRecommendationsQueryBuilder : PlacesQueryBuilder() {
     override fun putQueryParams(queryParams: MutableMap<String, String>) {
         latitudeLongitude?.apply { queryParams["ll"] = this }
         queryParams["fields"] = fields
+        queryParams["limit"] = "50"
+        queryParams["radius"] = "10000"
     }
 }

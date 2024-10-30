@@ -1,5 +1,13 @@
 package com.adyen.android.assignment.venues
 
+import com.adyen.android.assignment.venues.data.api.model.CategoryResponse
+import com.adyen.android.assignment.venues.data.api.model.CoordinateResponse
+import com.adyen.android.assignment.venues.data.api.model.GeoCodeResponse
+import com.adyen.android.assignment.venues.data.api.model.IconResponse
+import com.adyen.android.assignment.venues.data.api.model.LocationResponse
+import com.adyen.android.assignment.venues.data.api.model.PhotoResponse
+import com.adyen.android.assignment.venues.data.api.model.PlaceResponse
+import com.adyen.android.assignment.venues.data.api.model.RelatedPlaces
 import com.adyen.android.assignment.venues.domain.Category
 import com.adyen.android.assignment.venues.domain.ClosedBucket
 import com.adyen.android.assignment.venues.domain.IconBucket
@@ -9,6 +17,46 @@ import com.adyen.android.assignment.venues.domain.Place
 import java.util.UUID
 
 object Mocker {
+
+    fun getFakePlaceResponse(): PlaceResponse {
+        return PlaceResponse(
+            id = UUID.randomUUID().toString(),
+            name = "Fake Place",
+            location = LocationResponse(
+                address = "Fake Address",
+                country = "Fake Country",
+                locality = "Fake Locality",
+                postcode = "Fake Postcode"
+            ),
+            geocode = GeoCodeResponse(
+                main = CoordinateResponse(0.0, 0.0)
+            ),
+            categories = listOf(
+                CategoryResponse(
+                    id = "1",
+                    name = "Fake Category",
+                    iconResponse = IconResponse(
+                        prefix = "Fake Prefix",
+                        suffix = "Fake Suffix"
+                    )
+                )
+            ),
+            distance = 0,
+            timezone = "Fake Timezone",
+            photos = listOf(
+                PhotoResponse(
+                    prefix = "Fake Prefix",
+                    suffix = "Fake Suffix",
+                    width = 0,
+                    height = 0,
+                    id = "1",
+                    createdAt = ""
+                )
+            ),
+            closedBucket = ClosedBucket.LIKELY_OPEN.name,
+            relatedPlaces = RelatedPlaces()
+        )
+    }
 
     fun getFakePlace(): Place {
         return Place(

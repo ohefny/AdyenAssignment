@@ -2,8 +2,8 @@ package com.adyen.android.assignment.venues.domain
 
 import com.adyen.android.assignment.core.di.Dispatcher
 import com.adyen.android.assignment.core.di.DispatcherKey
-import com.adyen.android.assignment.venues.data.PlacesRepository
-import com.adyen.android.assignment.venues.data.emitFlow
+import com.adyen.android.assignment.core.miscs.emitFlow
+import com.adyen.android.assignment.location.domain.LatLng
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -18,5 +18,3 @@ class GetPlacesUseCase @Inject constructor(
     }.flowOn(dispatcher)
 
 }
-
-data class LatLng(val latitude: Double, val longitude: Double)

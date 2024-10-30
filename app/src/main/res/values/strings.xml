@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Android Assignment</string>
+    <string name="msg_location_permission">By knowing your location, we can suggest nearby venues, restaurants, and events that suit your interests, making it easier for you to discover new places.</string>
+    <string name="lbl_enable_location">Enable Location</string>
+    <string name="lbl_go_to_settings">Go to Settings</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="title_location_permission_denied">Location Permission Denied</string>
+    <string name="title_gps_is_off">Location is Off</string>
+    <string name="msg_gps_is_off">We can\'t find nearby venues without your location! Please enable GPS to explore places around you.\n</string>
+
 </resources>

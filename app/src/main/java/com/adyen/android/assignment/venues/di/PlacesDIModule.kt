@@ -1,8 +1,8 @@
 package com.adyen.android.assignment.venues.di
 
 import com.adyen.android.assignment.venues.data.DefaultPlacesRepository
-import com.adyen.android.assignment.venues.data.PlacesRepository
 import com.adyen.android.assignment.venues.data.api.PlacesService
+import com.adyen.android.assignment.venues.domain.PlacesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

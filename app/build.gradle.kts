@@ -68,7 +68,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation (libs.retrofit)
     implementation (libs.converter.moshi)
-    implementation(libs.moshi.kotlin) // Check for the latest version
+    implementation(libs.moshi.kotlin)
+    implementation(libs.play.services.location) // Check for the latest version
     kapt(libs.moshi.kotlin.codegen)
     implementation (libs.hilt.android)
     kapt(libs.hilt.compiler)

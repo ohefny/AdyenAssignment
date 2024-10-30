@@ -4,11 +4,11 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class GeoCodeResponse(
-    val main: Coordinate
+    val main: CoordinateResponse
 )
 
 @JsonClass(generateAdapter = true)
-data class Coordinate(
+data class CoordinateResponse(
     val latitude: Double,
     val longitude: Double,
 )

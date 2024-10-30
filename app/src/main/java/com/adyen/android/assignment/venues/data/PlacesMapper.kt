@@ -11,7 +11,7 @@ import com.adyen.android.assignment.venues.domain.PhotoBucket
 import com.adyen.android.assignment.venues.domain.Place
 
 fun PlaceResponse.toDomain(): Place {
-    val location = locationResponse?.address ?: locationResponse?.country ?: ""
+    val location = location?.address ?: location?.country ?: location?.locality ?: ""
     val(lat,lng) = geocode.main
     return Place(
         id = id,
@@ -41,8 +41,8 @@ fun CategoryResponse.toDomain(): Category {
         id = id,
         name = name,
         icons = IconBucket(
-            small = icon.prefix + "64" + icon.suffix,
-            tiny = icon.prefix + "32" + icon.suffix
+            small = iconResponse.prefix + "64" + iconResponse.suffix,
+            tiny = iconResponse.prefix + "32" + iconResponse.suffix
         )
     )
 }
