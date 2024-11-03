@@ -49,9 +49,9 @@ sealed class FilterOption {
         override operator fun invoke(place: Place): Boolean = place.verified == true
     }
 
-    data class CategoryFilter(val category: Category) : FilterOption() {
+    data class CategoryFilter(val categoryId: String) : FilterOption() {
         override operator fun invoke(place: Place): Boolean =
-            place.categories.any { it.id == category.id }
+            place.categories.any { it.id == categoryId }
     }
 
     abstract operator fun invoke(place: Place): Boolean

@@ -24,7 +24,7 @@ class FilterAndSortPlacesUseCaseTest {
     @Test
     fun `empty places list should return empty list`() = runTest {
         val places = emptyList<Place>()
-        val filters = listOf(FilterOption.CategoryFilter(Mocker.getFakeCategory()))
+        val filters = listOf(FilterOption.CategoryFilter("1"))
 
         val result = filterAndSortPlacesUseCase(places, filters).first()
 
@@ -40,7 +40,7 @@ class FilterAndSortPlacesUseCaseTest {
             Mocker.getFakePlace().copy(categories = listOf(fakeCategoryWithId1)),
             Mocker.getFakePlace().copy(categories = listOf(differentCategory))
         )
-        val filters = listOf(FilterOption.CategoryFilter(fakeCategoryWithId1))
+        val filters = listOf(FilterOption.CategoryFilter("1"))
 
         val result = filterAndSortPlacesUseCase(places, filters).first()
 
@@ -101,7 +101,7 @@ class FilterAndSortPlacesUseCaseTest {
             Mocker.getFakePlace().copy(categories = listOf(differentCategory), distance = 300),
             Mocker.getFakePlace().copy(categories = listOf(fakeCategory), distance = 100),
         )
-        val filters = listOf(FilterOption.CategoryFilter(fakeCategory))
+        val filters = listOf(FilterOption.CategoryFilter("1"))
         val sortOption = SortOption.DISTANCE
 
         val result = filterAndSortPlacesUseCase(places, filters, sortOption).first()
@@ -127,7 +127,7 @@ class FilterAndSortPlacesUseCaseTest {
             placeWithCategory3,
             placeWithCategory1And2,
         )
-        val filters = listOf(FilterOption.CategoryFilter(fakeCategoryWithId1), FilterOption.CategoryFilter(fakeCategoryWithId2))
+        val filters = listOf(FilterOption.CategoryFilter("1"), FilterOption.CategoryFilter("2"))
 
         val result = filterAndSortPlacesUseCase(places, filters).first()
 
@@ -156,12 +156,11 @@ class FilterAndSortPlacesUseCaseTest {
     @Test
     fun `filter with no matches should return empty list`() = runTest {
         val category1 = Mocker.getFakeCategory().copy(id = "1")
-        val category2 = Mocker.getFakeCategory().copy(id = "2")
         val places = listOf(
             Mocker.getFakePlace().copy(categories = listOf(category1)),
             Mocker.getFakePlace().copy(openStatus = ClosedBucket.VERY_LIKELY_CLOSED)
         )
-        val filters = listOf(FilterOption.CategoryFilter(category2))
+        val filters = listOf(FilterOption.CategoryFilter("2"))
 
         val result = filterAndSortPlacesUseCase(places, filters).first()
 
