@@ -1,6 +1,7 @@
 [versions]
 agp = "8.4.2"
 converterMoshi = "2.9.0"
+mockitoInline = "4.0.0"
 moshi = "1.15.1"
 kotlin = "1.9.23"
 coreKtx = "1.13.1"
@@ -9,7 +10,7 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycle = "2.8.1"
 activityCompose = "1.9.0"
-composeBom = "2024.05.00"
+composeBom = "2024.10.01"
 jetbrainsKotlinJvm = "1.9.23"
 retrofit = "2.9.0"
 hilt = "2.51.1"
@@ -19,6 +20,7 @@ kotlinx-coroutines-test = "1.9.0"
 mockito-core = "4.6.1"
 mockito-kotlin = "4.0.0"
 playServicesLocation = "21.3.0"
+okhttp = "4.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +39,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
@@ -48,6 +51,8 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockito-kotlin" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

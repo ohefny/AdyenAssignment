@@ -17,29 +17,19 @@ data class PlaceResponse(
     val timezone: String,
     @Json(name = "closed_bucket")
     val closedBucket:String,
-    @Json(name = "related_places")
-    val relatedPlaces: RelatedPlaces,
-    val photos: List<PhotoResponse>? = null
+    val photos: List<PhotoResponse>? = null,
+    val rating: Double? = null,
+    val verified: Boolean? = null,
+    val price: Int? = null,
+    val hours: HoursResponse? = null
 )
 
 @JsonClass(generateAdapter = true)
-data class RelatedPlaces(
-    val parent: ParentPlace? = null,
-    val children: List<ChildPlace>? = null
-)
-
-@JsonClass(generateAdapter = true)
-data class ParentPlace(
-    @Json(name = "fsq_id")
-    val id: String,
-    val categories: List<CategoryResponse>,
-    val name: String
-)
-
-@JsonClass(generateAdapter = true)
-data class ChildPlace(
-    @Json(name = "fsq_id")
-    val id: String,
-    val categories: List<CategoryResponse>,
-    val name: String
+data class HoursResponse(
+    @Json(name = "display")
+    val display: String?,
+    @Json(name = "is_local_holiday")
+    val isLocalHoliday: Boolean,
+    @Json(name = "open_now")
+    val openNow: Boolean
 )

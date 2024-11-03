@@ -8,7 +8,6 @@ plugins {
 android {
     namespace = "com.adyen.android.assignment"
     compileSdk = 34
-
     defaultConfig {
         applicationId = "com.adyen.android.assignment"
         minSdk = 30
@@ -75,6 +74,8 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     implementation(libs.coil)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
@@ -86,5 +87,4 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
 }

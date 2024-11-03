@@ -7,7 +7,6 @@ import com.adyen.android.assignment.venues.data.api.model.IconResponse
 import com.adyen.android.assignment.venues.data.api.model.LocationResponse
 import com.adyen.android.assignment.venues.data.api.model.PhotoResponse
 import com.adyen.android.assignment.venues.data.api.model.PlaceResponse
-import com.adyen.android.assignment.venues.data.api.model.RelatedPlaces
 import com.adyen.android.assignment.venues.domain.Category
 import com.adyen.android.assignment.venues.domain.ClosedBucket
 import com.adyen.android.assignment.venues.domain.IconBucket
@@ -54,7 +53,20 @@ object Mocker {
                 )
             ),
             closedBucket = ClosedBucket.LIKELY_OPEN.name,
-            relatedPlaces = RelatedPlaces()
+            verified = true,
+            rating = 9.0,
+            price = null,
+        )
+    }
+
+    fun getFakeCategory(): Category {
+        return Category(
+            id = "1",
+            name = "Fake Category",
+            icons = IconBucket(
+                small = "Small",
+                tiny = "Tiny"
+            )
         )
     }
 
@@ -86,7 +98,10 @@ object Mocker {
                     large = "large Photo"
                 )
             ),
-            openStatus = ClosedBucket.LIKELY_OPEN
+            openStatus = ClosedBucket.LIKELY_OPEN,
+            verified = true,
+            rating = 9.0,
+            price = null,
         )
     }
 }

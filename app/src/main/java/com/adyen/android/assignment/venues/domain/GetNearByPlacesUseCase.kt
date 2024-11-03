@@ -8,9 +8,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetPlacesAtCurrentLocationUseCase @Inject constructor(
+class GetNearByPlacesUseCase @Inject constructor(
     private val getPacesUseCase: GetPlacesUseCase,
     private val locationRepository: LocationRepository,
     @Dispatcher(DispatcherKey.IO) private val dispatcher: CoroutineDispatcher
@@ -18,6 +19,7 @@ class GetPlacesAtCurrentLocationUseCase @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(): Flow<List<Place>> = locationRepository.getCurrentLocation()
         .flatMapConcat { getPacesUseCase(it) }
+        .map { it.filter { place -> place.photos.isNotEmpty() } }
         .flowOn(dispatcher)
 
 }

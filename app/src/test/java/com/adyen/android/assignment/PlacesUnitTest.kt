@@ -3,9 +3,7 @@ package com.adyen.android.assignment
 import com.adyen.android.assignment.venues.data.api.PlacesService
 import com.adyen.android.assignment.venues.data.api.VenueRecommendationsQueryBuilder
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
 import org.junit.Test
 
 class PlacesUnitTest {

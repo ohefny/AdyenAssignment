@@ -2,7 +2,7 @@ package com.adyen.android.assignment.venues.data.api
 
 class VenueRecommendationsQueryBuilder : PlacesQueryBuilder() {
     private var latitudeLongitude: String? = null
-    private var fields: String = "fsq_id,photos,categories,closed_bucket,location,name,distance,geocodes,timezone,related_places"
+    private var fields: String = "fsq_id,photos,categories,closed_bucket,location,name,distance,geocodes,timezone,photos,verified,price,rating,hours"
     fun setLatitudeLongitude(latitude: Double, longitude: Double): VenueRecommendationsQueryBuilder {
         this.latitudeLongitude = "$latitude,$longitude"
         return this
