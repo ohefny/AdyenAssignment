@@ -2,8 +2,6 @@ package com.adyen.android.assignment.venues.data.api
 
 import com.adyen.android.assignment.BuildConfig
 import com.adyen.android.assignment.venues.data.api.model.ResponseWrapper
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.QueryMap
@@ -19,15 +17,4 @@ interface PlacesService {
     @GET("places/search")
     suspend fun getVenueRecommendations(@QueryMap query: Map<String, String>): ResponseWrapper
 
-
-    companion object  {
-        private val retrofit by lazy {
-            Retrofit.Builder()
-                .baseUrl(BuildConfig.FOURSQUARE_BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
-        }
-
-        val instance: PlacesService by lazy { retrofit.create(PlacesService::class.java) }
-    }
 }
