@@ -3,8 +3,8 @@ package com.adyen.android.assignment.venues.presentation
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.adyen.android.assignment.location.domain.LocationAvailability
 import com.adyen.android.assignment.location.domain.GetLocationAvailabilityUpdates
+import com.adyen.android.assignment.location.domain.LocationAvailability
 import com.adyen.android.assignment.venues.domain.FilterAndSortPlacesUseCase
 import com.adyen.android.assignment.venues.domain.FilterOption
 import com.adyen.android.assignment.venues.domain.GetNearbyPlacesWithAggregatedInfoUseCase
@@ -63,7 +63,7 @@ class PlacesViewModel @Inject constructor(
                 }
             }.catch {
                 //Log.e(TAG, "fetchPlaces: ", it)
-                updateState { copy(showError = true) }
+                updateState { copy(showError = true, isLoading = false) }
             }.launchIn(viewModelScope)
     }
 

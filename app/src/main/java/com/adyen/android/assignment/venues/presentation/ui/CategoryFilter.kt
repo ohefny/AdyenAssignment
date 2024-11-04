@@ -1,6 +1,5 @@
 package com.adyen.android.assignment.venues.presentation.ui
 
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -49,7 +48,7 @@ fun CategoryFilter(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(categories, key = {it.name}) { category ->
-            val animatedModifier = Modifier.animateItemPlacement(animationSpec = tween(durationMillis = 300)) // Animation duration
+            //val animatedModifier = Modifier.animateItemPlacement(animationSpec = tween(durationMillis = 300)) // Animation duration
 
             CategoryChip(
                 category = category,
@@ -57,7 +56,7 @@ fun CategoryFilter(
                     onCategorySelected(category)
                     },
                 isSelected = category.isSelected,
-                modifier = animatedModifier
+                modifier = Modifier.animateItem()
             )
         }
     }
