@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -23,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
@@ -40,6 +41,7 @@ import kotlin.math.roundToInt
 fun PlaceItem(place: Place) {
     val category = place.categories.firstOrNull()
     Card(
+        //colors = CardDefaults.cardColors().copy(containerColor = MaterialTheme.colorScheme.outline),
         modifier = Modifier
             .padding(8.dp)
             .height(328.dp)
@@ -55,7 +57,7 @@ fun PlaceItem(place: Place) {
             PlaceInfoSection(place)
             //categories section contains a list of categories of image and name
             if (category != null)
-                 CategoryItem(category, modifier = Modifier.weight(1f))
+                CategoryItem(category, modifier = Modifier.weight(1f))
         }
     }
 }
@@ -76,6 +78,7 @@ private fun PlaceInfoSection(place: Place) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = Icons.Outlined.LocationOn,
+                tint = Color(0xFF1E88E5),
                 contentDescription = "Location Icon",
                 modifier = Modifier.size(16.dp)
             )
@@ -92,6 +95,7 @@ private fun PlaceInfoSection(place: Place) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = Icons.Outlined.Star,
+                tint = Color(0xFFFFC107),
                 contentDescription = "Rating Icon",
                 modifier = Modifier.size(16.dp)
             )
@@ -107,6 +111,7 @@ private fun PlaceInfoSection(place: Place) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = Icons.Filled.CheckCircle,
+                tint = Color(0xFF4CAF50),
                 contentDescription = "Verified Icon",
                 modifier = Modifier.size(16.dp)
             )
@@ -122,6 +127,7 @@ private fun PlaceInfoSection(place: Place) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.ic_outline_payments_24),
+                tint = Color(0xFF009688),
                 contentDescription = "Price Icon",
                 modifier = Modifier.size(16.dp)
             )
@@ -138,6 +144,7 @@ private fun PlaceInfoSection(place: Place) {
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.ic_outline_directions_24),
                 contentDescription = "Distance Icon",
+                tint = Color(0xFF757575),
                 modifier = Modifier.size(16.dp)
             )
             Spacer(modifier = Modifier.width(4.dp))
@@ -152,23 +159,27 @@ private fun PlaceInfoSection(place: Place) {
 
 
 @Composable
-fun CategoryItem(category: Category,modifier: Modifier = Modifier) {
+fun CategoryItem(category: Category, modifier: Modifier = Modifier) {
     Box(modifier = modifier.padding(bottom = 4.dp), contentAlignment = Alignment.BottomCenter) {
         Row {
-            AsyncImage(category.icons.small, contentDescription = null)
+            AsyncImage(
+                category.icons.small,
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary),
+                contentDescription = null
+            )
             Text(
                 text = category.name,
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Normal,
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.onPrimary,
             )
         }
     }
 }
 
 @Composable
-fun PlaceItemPlaceHolder(){
-    Column(Modifier,verticalArrangement = Arrangement.spacedBy(8.dp)) {
+fun PlaceItemPlaceHolder() {
+    Column(Modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Box(
             modifier = Modifier
                 .width(170.dp)

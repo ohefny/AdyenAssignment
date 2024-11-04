@@ -3,12 +3,11 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-// Define the main color tokens
 val PrimaryColor = Color(0xFF6BC8C8)          // Bright teal
 val OnPrimaryColor = Color.White
 val PrimaryContainer = Color(0xFFB2EBEB)      // Light teal for containers
 val OnPrimaryContainer = Color(0xFF003333)
-
+val surfaceContainer = Color(0xFF9BD0D0)
 val SecondaryColor = Color(0xFFF8B400)        // Bright yellow
 val OnSecondaryColor = Color.Black
 val SecondaryContainer = Color(0xFFFFE082)    // Lighter yellow for containers
@@ -35,6 +34,7 @@ val LightColors = lightColorScheme(
     surfaceVariant = PrimaryContainer,
     secondaryContainer = SecondaryContainer,
     onSecondaryContainer = OnSecondaryContainer,
+    surfaceContainerHighest = surfaceContainer,
     background = BackgroundColor,
     onBackground = OnBackgroundColor,
     surface = SurfaceColor,

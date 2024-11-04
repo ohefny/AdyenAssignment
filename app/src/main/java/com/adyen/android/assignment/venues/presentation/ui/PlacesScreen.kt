@@ -1,7 +1,7 @@
 package com.adyen.android.assignment.venues.presentation.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -24,6 +25,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.adyen.android.assignment.R
 import com.adyen.android.assignment.venues.domain.FilterOption
+import com.adyen.android.assignment.venues.domain.Place
 import com.adyen.android.assignment.venues.presentation.PlacesViewModel
 import com.adyen.android.assignment.venues.presentation.model.PlaceUIState
 
@@ -48,6 +52,9 @@ fun PlacesScreen(modifier: Modifier, viewModel: PlacesViewModel = viewModel()) {
     val isOpenNowChecked by remember(uiState.appliedFilters) {
         mutableStateOf(uiState.appliedFilters.any { it is FilterOption.OpenNow })
     }
+    var sortToggle by rememberSaveable {  mutableStateOf(false) }
+    var filterToggle by rememberSaveable { mutableStateOf(false) }
+
     LaunchedEffect(viewModel) {
         viewModel.initialize()
     }
@@ -60,7 +67,7 @@ fun PlacesScreen(modifier: Modifier, viewModel: PlacesViewModel = viewModel()) {
         } else if (uiState.showError && !uiState.isInitialized) {
             ErrorScreen(onRetry = { viewModel.fetchPlaces() })
         } else {
-            Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(0.dp)) {
+            Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 // Category filter at the top
                 CategoryFilter(
                     // Assume uiState contains the list of categories
@@ -69,15 +76,22 @@ fun PlacesScreen(modifier: Modifier, viewModel: PlacesViewModel = viewModel()) {
                     },
                     categories = uiState.categories
                 )
-                SortOptions(uiState.sortBy) { viewModel.toggleSortBy(it) }
-                FiltersSection(
-                    openNowChecked = isOpenNowChecked,
-                    onOpenNowCheckedChange = { viewModel.filterByOpenNow() },
-                    verifiedChecked = isVerifiedChecked,
-                    onVerifiedCheckedChange = { viewModel.filterByVerified() }
-                )
-                ResultsTitle(uiState.filteredPlaces.size)
-                //pull to refresh
+                if(filterToggle)
+                    FiltersSection(
+                        openNowChecked = isOpenNowChecked,
+                        onOpenNowCheckedChange = { viewModel.filterByOpenNow() },
+                        verifiedChecked = isVerifiedChecked,
+                        onVerifiedCheckedChange = { viewModel.filterByVerified() }
+                    )
+                if (sortToggle)
+                    SortOptions(uiState.sortBy) { viewModel.toggleSortBy(it) }
+
+                ResultsTitle(
+                    placeCount = uiState.filteredPlaces.size,
+                    isSortOn = sortToggle,
+                    isFilterOn = filterToggle,
+                    onSortToggled = { sortToggle = !sortToggle },
+                    onFilterToggled = { filterToggle = !filterToggle })
                 PlacesResults(uiState)
             }
         }
@@ -88,7 +102,6 @@ fun PlacesScreen(modifier: Modifier, viewModel: PlacesViewModel = viewModel()) {
 @Composable
 private fun PlacesResults(uiState: PlaceUIState) {
 
-    // Create a LazyListState to manage the scroll position
     val listState = rememberLazyGridState()
     LaunchedEffect(uiState.appliedFilters.size, uiState.sortBy) {
         listState.animateScrollToItem(0) // Scroll to the first item
@@ -106,7 +119,18 @@ private fun PlacesResults(uiState: PlaceUIState) {
 
 
 @Composable
-fun ResultsTitle(placeCount: Int) {
+fun ResultsTitle(
+    placeCount: Int,
+    isSortOn: Boolean,
+    isFilterOn: Boolean,
+    onSortToggled: () -> Unit,
+    onFilterToggled: () -> Unit
+) {
+    val sortColor =
+        if (isSortOn) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+    val filterColor =
+        if (isFilterOn) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -119,10 +143,31 @@ fun ResultsTitle(placeCount: Int) {
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.weight(1f)
         )
+
+        Icon(
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_sort_24),
+            contentDescription = "Sort Icon",
+            tint = sortColor,
+            modifier = Modifier
+                .size(24.dp)
+                .clickable {
+                    onSortToggled()
+                }
+        )
+        Icon(
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_filter_24),
+            contentDescription = "Filter Icon",
+            tint = filterColor,
+            modifier = Modifier
+                .size(24.dp)
+                .clickable {
+                    onFilterToggled()
+                }
+        )
         Text(
             text = "$placeCount places found",
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
         )
     }
 }
@@ -151,7 +196,6 @@ fun PlacesGridPlaceHolder() {
     }
 }
 
-//create error screen with retry button
 @Composable
 fun ErrorScreen(onRetry: () -> Unit) {
     Column(

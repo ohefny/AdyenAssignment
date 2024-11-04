@@ -48,8 +48,6 @@ fun CategoryFilter(
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(categories, key = {it.name}) { category ->
-            //val animatedModifier = Modifier.animateItemPlacement(animationSpec = tween(durationMillis = 300)) // Animation duration
-
             CategoryChip(
                 category = category,
                 onSelected = {
